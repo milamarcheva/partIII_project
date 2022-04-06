@@ -1,9 +1,106 @@
-import java.util.*;
-import java.util.stream.*;
-import javax.lang.model.type.ArrayType;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
+import javax.xml.crypto.Data;
 
 public class OnlineEM {
+
+
+  private static void print2D(double[][] mat)
+  {
+    // Loop through all rows
+    for (double[] row : mat){
+      System.out.println();
+      // Loop through all columns of current row
+      for (double x : row)
+        System.out.print(x + " ");
+    }
+    System.out.println();
+  }
+
+  private static double[][] multiply2D(double[][] a, double[][] b){
+    double[][] res = new double[a.length][a[0].length];
+
+    if(a.length != b.length){
+      System.out.println("Elementwise multiplication is not possible, because the number of rows differ");
+    }
+    else if(a[0].length != b[0].length){
+      System.out.println("Elementwise multiplication is not possible, because the number of cols differ");
+    }
+    else{
+      for (int i=0; i<a.length; i++){
+        for (int j=0; j<a[0].length; j++){
+          res[i][j] = a[i][j]*b[i][j];
+        }
+      }
+    }
+    return res;
+  }
+
+  private static double[][] divide2D1D(double[][] a, double[] b){
+    double[][] res = new double[a.length][a[0].length];
+
+    if(a[0].length != b.length){ //Columns in a should be the same number as elements in b
+      System.out.println("Elementwise multiplication is not possible, because the number of rows differ");
+      System.out.println("a length: "+ a.length + "b lenght"+ b.length);
+    }
+    else{
+      for (int i=0; i<a.length; i++){
+        for (int j=0; j<a[0].length; j++){
+          res[i][j] = a[i][j]/b[j];
+        }
+      }
+    }
+    return res;
+  }
+
+  private static double[][][] divide3D2D(double[][][] a, double[][] b){
+    double[][][] res = new double[a.length][a[0].length][a[0][0].length];
+
+    if(a[0].length != b.length){ //Columns in a should be the same number as elements in b
+      System.out.println("Elementwise multiplication is not possible, because the number of rows differ");
+      System.out.println("a length: "+ a.length + "b lenght"+ b.length);
+    }
+    else{
+      for (int i=0; i<a.length; i++){
+        for (int j=0; j<a[0].length; j++){
+          for (int k = 0; k < a[0][0].length; k++) {
+            res[i][j][k] = a[i][j][k]/b[j][k];
+          }
+        }
+      }
+    }
+    return res;
+  }
+
+  private static double[] divide1D(double[] a, double[] b){
+    double[] res = new double[a.length];
+
+    if(a.length != b.length){
+      System.out.println("Elementwise multiplication is not possible, because the number of elements differ");
+    }
+
+    else{
+      for (int i=0; i<a.length; i++){
+        res[i] = a[i]/b[i];
+      }
+    }
+    return res;
+  }
+
+
+  private static class ReturnBM{
+    private double[][] tp;
+    private HashMap<String, ArrayList<Double>> ep;
+
+    protected ReturnBM(double[][] tp, HashMap<String, ArrayList<Double>> ep) {
+      this.tp = tp;
+      this.ep = ep;
+    }
+  }
+
   public static double[][] forward(ArrayList<String> seq, HashMap<String, ArrayList<Double>> emission_p, double[][] transition_p, double[] start_p){
     int number_of_states = start_p.length;
     int seq_len = seq.size();
@@ -73,7 +170,7 @@ public class OnlineEM {
     return beta;
   }
 
-  public static ReturnBM baumWelch(
+  private static ReturnBM baumWelch(
       ArrayList<String> seq,
       HashMap<String, ArrayList<Double>> emission_p,
       double[][] transition_p,
@@ -87,7 +184,6 @@ public class OnlineEM {
 
     // Expectaion
 
-    System.out.println("Here1");
     double[][] alpha_beta = multiply2D(alpha, beta);
 
     double[] gamma_normalization = new double[seq_len];
@@ -97,12 +193,11 @@ public class OnlineEM {
         column_sum += alpha_beta[j][i];
       }
       gamma_normalization[i] = column_sum;
-      column_sum=0;
     }
 
-    System.out.println("Here2");
     double[][] gamma = divide2D1D(alpha_beta, gamma_normalization); // Normalization: cols should sum to 1
 
+    //normalization over all counts i->j (in all possible terminals)
     double[][][] xi =
         new double[number_of_states][number_of_states]
             [seq_len
@@ -129,8 +224,6 @@ public class OnlineEM {
       }
     }
 
-
-
     xi = divide3D2D(xi, xi_normalization);
 
     // Maximisation
@@ -155,13 +248,12 @@ public class OnlineEM {
       for (int state = 0; state < number_of_states; state++) {
         double sum_gamma = 0;
         for (int token_index = 0; token_index < seq_len; token_index++) {
-          if (seq.get(token_index) == token) {
+          if (seq.get(token_index).equals(token)) {
             sum_gamma += gamma[state][token_index];
           }
         }
         numerators[state] = sum_gamma;
       }
-      System.out.println("Here3");
       double[] eps_token = divide1D(numerators, denominators);
       b.put(
           token, new ArrayList<>(DoubleStream.of(eps_token).boxed().collect(Collectors.toList())));
@@ -185,96 +277,26 @@ public class OnlineEM {
     return new ReturnBM(a, b);
   }
 
-  public static void print2D(double mat[][])
-  {
-    // Loop through all rows
-    for (double[] row : mat){
-      System.out.println();
-      // Loop through all columns of current row
-      for (double x : row)
-        System.out.print(x + " ");
-      }
-    System.out.println();
-  }
-
-  public static double[][] multiply2D(double[][] a, double[][] b){
-    double[][] res = new double[a.length][a[0].length];
-
-    if(a.length != b.length){
-      System.out.println("Elementwise multiplication is not possible, because the number of rows differ");
-    }
-    else if(a[0].length != b[0].length){
-      System.out.println("Elementwise multiplication is not possible, because the number of cols differ");
-    }
-    else{
-      for (int i=0; i<a.length; i++){
-        for (int j=0; j<a[0].length; j++){
-          res[i][j] = a[i][j]*b[i][j];
-        }
-      }
-    }
-    return res;
-  }
-
-  public static double[][] divide2D1D(double[][] a, double[] b){
-    double[][] res = new double[a.length][a[0].length];
-
-    if(a[0].length != b.length){ //Columns in a should be the same number as elements in b
-      System.out.println("Elementwise multiplication is not possible, because the number of rows differ");
-      System.out.println("a length: "+ a.length + "b lenght"+ b.length);
-    }
-    else{
-      for (int i=0; i<a.length; i++){
-        for (int j=0; j<a[0].length; j++){
-          res[i][j] = a[i][j]/b[j];
-        }
-      }
-    }
-    return res;
-  }
-
-  public static double[][][] divide3D2D(double[][][] a, double[][] b){
-    double[][][] res = new double[a.length][a[0].length][a[0][0].length];
-
-    if(a[0].length != b.length){ //Columns in a should be the same number as elements in b
-      System.out.println("Elementwise multiplication is not possible, because the number of rows differ");
-      System.out.println("a length: "+ a.length + "b lenght"+ b.length);
-    }
-    else{
-      for (int i=0; i<a.length; i++){
-        for (int j=0; j<a[0].length; j++){
-          for (int k = 0; k < a[0][0].length; k++) {
-            res[i][j][k] = a[i][j][k]/b[j][k];
-          }
-        }
-      }
-    }
-    return res;
-  }
-
-  public static double[] divide1D(double[] a, double[] b){
-    double[] res = new double[a.length];
-
-    if(a.length != b.length){
-      System.out.println("Elementwise multiplication is not possible, because the number of elements differ");
-    }
-
-    else{
-      for (int i=0; i<a.length; i++){
-        res[i] = a[i]/b[i];
-      }
-    }
-    return res;
-  }
-
+  //TODO
+//  public static ReturnBM onlineEM(
+//      ArrayList<ArrayList<String>> sequences,
+//      HashMap<String, ArrayList<Double>> emission_p,
+//      double[][] transition_p,
+//      double[] start_p) {
+//    System.out.println("Online EM");
+//    int number_of_states = start_p.length;
+//    int seq_len = seq.size();
+//
+//    return new ReturnBM(tp, ep);
+//    }
 
   public static void main(String[] args) {
     ArrayList<String> seq = new ArrayList<String>(Arrays.asList("C", "C","G", "A", "A", "G", "T", "G"));
     HashMap<String, ArrayList<Double>> emission_p = new HashMap<String, ArrayList<Double>>(){{
-      put("A", new ArrayList<Double>(Arrays.asList(0.7, 0.3, 0.4)));
-      put("T", new ArrayList<Double>(Arrays.asList(0.1, 0.2, 0.2)));
-      put("C", new ArrayList<Double>(Arrays.asList(0.1, 0.4, 0.2)));
-      put("G", new ArrayList<Double>(Arrays.asList(0.1, 0.1, 0.2)));
+      put("A", new ArrayList<>(Arrays.asList(0.7, 0.3, 0.4)));
+      put("T", new ArrayList<>(Arrays.asList(0.1, 0.2, 0.2)));
+      put("C", new ArrayList<>(Arrays.asList(0.1, 0.4, 0.2)));
+      put("G", new ArrayList<>(Arrays.asList(0.1, 0.1, 0.2)));
     }};
     double[][] transition_p = {{0.2, .4, .4}, {0.1, 0.6, 0.3},{0.8, 0.1, 0.1}};
     double[] start_p = {.3, .3, .4};
@@ -290,17 +312,9 @@ public class OnlineEM {
 
     print2D(rbm.tp);
 
+    ArrayList<ArrayList<ArrayList<String>>> sentences = DataLoader.populateSentences(DataLoader.PTB_PATH);
+//    System.out.println(sentences.get(3).get(3).get(2));
 
   }
 
-  private static class ReturnBM{
-    private double[][] tp;
-    private HashMap<String, ArrayList<Double>> ep;
-
-    public ReturnBM(double[][] tp, HashMap<String, ArrayList<Double>> ep) {
-      this.tp = tp;
-      this.ep = ep;
-    }
-
-  }
 }
