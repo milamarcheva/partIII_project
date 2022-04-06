@@ -30,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/OnlineEM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="293" column="42" selection-start-line="293" selection-start-column="42" selection-end-line="293" selection-end-column="42" />
+            <state relative-caret-position="15">
+              <caret line="288" column="2" lean-forward="true" selection-start-line="288" selection-start-column="2" selection-end-line="288" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#print2D#0;class#OnlineEM#0" />
@@ -39,6 +39,7 @@
                 <element signature="method#divide2D1D#0;class#OnlineEM#0" />
                 <element signature="method#divide3D2D#0;class#OnlineEM#0" />
                 <element signature="method#divide1D#0;class#OnlineEM#0" />
+                <element signature="e#9684#9692#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,11 +130,11 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1649244051354" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1649244687105" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -216,12 +217,18 @@
       <option name="project" value="LOCAL" />
       <updated>1649243772100</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added DataLoader class.&#10;&#10;The DataLoader class reads the files containing the PTB and saves the information in the array sentences.">
+      <created>1649244149830</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1649244149830</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4974227" visible="true" weight="0.099595144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -302,8 +309,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OnlineEM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="293" column="42" selection-start-line="293" selection-start-column="42" selection-end-line="293" selection-end-column="42" />
+        <state relative-caret-position="15">
+          <caret line="288" column="2" lean-forward="true" selection-start-line="288" selection-start-column="2" selection-end-line="288" selection-end-column="2" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#print2D#0;class#OnlineEM#0" />
@@ -311,6 +318,7 @@
             <element signature="method#divide2D1D#0;class#OnlineEM#0" />
             <element signature="method#divide3D2D#0;class#OnlineEM#0" />
             <element signature="method#divide1D#0;class#OnlineEM#0" />
+            <element signature="e#9684#9692#0" expanded="true" />
           </folding>
         </state>
       </provider>
