@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="132892c3-9f55-4403-8b86-af258fee0ff0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/partIII_project/OnlineEM$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/partIII_project/OnlineEM$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/partIII_project/OnlineEM$ReturnBM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/partIII_project/OnlineEM$ReturnBM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/partIII_project/OnlineEM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/partIII_project/OnlineEM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OnlineEM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OnlineEM.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/OnlineEM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
-              <caret line="517" column="24" selection-start-line="517" selection-start-column="24" selection-end-line="517" selection-end-column="24" />
+            <state relative-caret-position="330">
+              <caret line="490" column="9" lean-forward="true" selection-start-line="490" selection-start-column="9" selection-end-line="490" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#print2D#0;class#OnlineEM#0" />
@@ -152,7 +148,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1649344334899" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1649347401850" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -260,11 +256,19 @@
       <option name="project" value="LOCAL" />
       <updated>1649244707981</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added DataLoader class.&#10;&#10;The DataLoader class reads the files containing the PTB and saves the information in the array sentences.">
+      <created>1649347316509</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649347316509</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49808428" visible="true" weight="0.099595144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -357,8 +361,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OnlineEM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="517" column="24" selection-start-line="517" selection-start-column="24" selection-end-line="517" selection-end-column="24" />
+        <state relative-caret-position="330">
+          <caret line="490" column="9" lean-forward="true" selection-start-line="490" selection-start-column="9" selection-end-line="490" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#print2D#0;class#OnlineEM#0" />
