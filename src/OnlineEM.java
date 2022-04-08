@@ -371,10 +371,9 @@ public class OnlineEM {
     print2D(rbm.tp);
   }
 
-  public static ReturnBM iterBaumWelch(ArrayList<ArrayList<ArrayList<String>>> sentences, int iters, int subsetSize){
+  public static ReturnBM iterBaumWelch(ArrayList<ArrayList<ArrayList<String>>> sentences, int iters, int subsetSize, int clustersNumber){
 
     //INITALIZATION OF MATRICES
-    int clustersNumber = 6;
 
     double[] startProbs = random1D(clustersNumber);
     double sumStartProbs = 0;
@@ -514,9 +513,10 @@ public class OnlineEM {
 
     ArrayList<ArrayList<ArrayList<String>>> sentences = DataLoader.populateSentences(DataLoader.PTB_PATH);
     System.out.println(sentences.size() + " sentences were loaded.");
-    int iters = 20;
-    int subsetSize = 350;
-    ReturnBM rBM = iterBaumWelch(sentences, iters, subsetSize);
+    int iters = 30;
+    int subsetSize = 250;
+    int clustersNumber = 4; //noun, verb, adjective, function words
+    ReturnBM rBM = iterBaumWelch(sentences, iters, subsetSize, clustersNumber);
     System.out.println(iters + " iterations over " + subsetSize + " sentences were completed. ");
     System.out.println("Final transition probabilities: ");
     print2D(rBM.tp);
